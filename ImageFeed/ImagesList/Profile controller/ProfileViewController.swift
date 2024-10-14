@@ -6,7 +6,7 @@
 //
 import UIKit
 
-class ProfileViewController: UIViewController {
+final class ProfileViewController: UIViewController {
     private var label: UILabel?
     
     override func viewDidLoad() {
@@ -56,9 +56,11 @@ class ProfileViewController: UIViewController {
             with: UIImage(systemName: "ipad.and.arrow.forward")!,
             target: self,
             action: #selector(Self.didTapLogoutButton))
-        logoutButton.tintColor = .red
+        logoutButton.tintColor = .ypRed
         logoutButton.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(logoutButton)
+        logoutButton.widthAnchor.constraint(equalToConstant: 44).isActive = true
+        logoutButton.heightAnchor.constraint(equalToConstant: 44).isActive = true
         logoutButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -14).isActive = true
         logoutButton.centerYAnchor.constraint(equalTo: avatarImageView.centerYAnchor).isActive = true
     }
