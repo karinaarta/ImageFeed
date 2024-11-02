@@ -13,7 +13,7 @@ final class OAuth2Service {
     }
     
     func makeOAuthTokenRequest(code: String) -> URLRequest? {
-        
+        print ("makeouth")
         guard let baseURL = URL(string: "https://unsplash.com") else {
             return nil
         }
@@ -32,6 +32,7 @@ final class OAuth2Service {
         
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
+        print("request = \(request)")
         return request
     }
     
@@ -80,5 +81,5 @@ final class OAuth2Service {
         
         task.resume() // Запуск задачи
     }
-    }
+}
 
