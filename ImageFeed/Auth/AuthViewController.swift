@@ -28,7 +28,6 @@ extension AuthViewController: WebViewViewControllerDelegate {
         vc.dismiss(animated: true)
         
         OAuth2Service.shared.fetchOAuthToken(code: code) { result in
-            DispatchQueue.main.async {
                 switch result {
                     
                 case .success(let token):
@@ -40,7 +39,6 @@ extension AuthViewController: WebViewViewControllerDelegate {
                 case.failure(let error):
                     print (error.localizedDescription)
                 }
-            }
         }
     }
     func webViewViewControllerDidCancel(_ vc: WebViewViewController) {

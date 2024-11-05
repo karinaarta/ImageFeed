@@ -15,7 +15,7 @@ final class OAuth2Service {
         case codeError
     }
     
-    func makeOAuthTokenRequest(code: String) -> URLRequest? {
+   private func makeOAuthTokenRequest(code: String) -> URLRequest? {
         print ("makeouth")
         guard let baseURL = URL(string: "https://unsplash.com") else {
             return nil
@@ -43,7 +43,9 @@ final class OAuth2Service {
     func fetchOAuthToken(code: String, completion: @escaping (Result<String, Error>) -> Void) {
         assert(Thread.isMainThread)
         guard let request = makeOAuthTokenRequest(code: code) else {
-            completion(.failure(NetworkError.codeError))
+            DispatchQueue.main.async {
+                completion(.failure(NetworkError.codeError))
+            }
             return
         }
         
@@ -58,7 +60,9 @@ final class OAuth2Service {
                 print("HTTP Status Code: \(response.statusCode)")
                 if !(200...299).contains(response.statusCode) {
                     print("Received unsuccessful HTTP status code.")
-                    completion(.failure(NetworkError.codeError))
+                    DispatchQueue.main.async {
+                        completion(.failure(NetworkError.codeError))
+                    }
                     return
                 }
             }
@@ -66,7 +70,9 @@ final class OAuth2Service {
             // Парсим JSON-ответ
             guard let data = data else {
                 print("No data received from server.")
-                completion(.failure(NetworkError.codeError))
+                DispatchQueue.main.async {
+                    completion(.failure(NetworkError.codeError))
+                }
                 return
             }
             
@@ -74,14 +80,16 @@ final class OAuth2Service {
                 // Декодируем JSON в структуру OAuthTokenResponseBody
                 let decoder = JSONDecoder()
                 let tokenResponse = try decoder.decode(OAuthTokenResponseBody.self, from: data)
-
-                completion(.success(tokenResponse.accessToken)) // Передаем успешный результат с токеном
+                DispatchQueue.main.async {
+                    completion(.success(tokenResponse.accessToken)) // Передаем успешный результат с токеном
+                }
             } catch {
                 print("Failed to decode JSON: \(error)")
-                completion(.failure(error)) // Завершаем с ошибкой декодирования
+                DispatchQueue.main.async {
+                    completion(.failure(error)) // Завершаем с ошибкой декодирования
+                }
             }
         }
-        
         task.resume() // Запуск задачи
     }
 }
