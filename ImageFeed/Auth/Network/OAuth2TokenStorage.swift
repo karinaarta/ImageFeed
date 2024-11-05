@@ -8,7 +8,7 @@
 
 import Foundation
 
-class OAuth2TokenStorage {
+final class OAuth2TokenStorage {
     static let shared = OAuth2TokenStorage()
     private let authTokenKey = "accesToken"
     

@@ -8,6 +8,9 @@ import Foundation
 
 final class OAuth2Service {
     
+    static let shared = OAuth2Service()
+    private init() {}
+    
     private enum NetworkError: Error {
         case codeError
     }
@@ -37,7 +40,7 @@ final class OAuth2Service {
     }
     
     
-    func fetchOAuthToken(code: String, completion: @escaping (Result<OAuthTokenResponseBody, Error>) -> Void) {
+    func fetchOAuthToken(code: String, completion: @escaping (Result<String, Error>) -> Void) {
         assert(Thread.isMainThread)
         guard let request = makeOAuthTokenRequest(code: code) else {
             completion(.failure(NetworkError.codeError))
@@ -71,8 +74,8 @@ final class OAuth2Service {
                 // Декодируем JSON в структуру OAuthTokenResponseBody
                 let decoder = JSONDecoder()
                 let tokenResponse = try decoder.decode(OAuthTokenResponseBody.self, from: data)
-                print("Parsed Token Response: \(tokenResponse)") // Отладочная печать
-                completion(.success(tokenResponse)) // Передаем успешный результат с токеном
+
+                completion(.success(tokenResponse.accessToken)) // Передаем успешный результат с токеном
             } catch {
                 print("Failed to decode JSON: \(error)")
                 completion(.failure(error)) // Завершаем с ошибкой декодирования
