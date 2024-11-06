@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		AF39144D2CD0F69000C2518F /* SwiftKeychainWrapper in Frameworks */ = {isa = PBXBuildFile; productRef = AF39144C2CD0F69000C2518F /* SwiftKeychainWrapper */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		AF61CDFB2CA6D74D005CC5BF /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -65,6 +69,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AF39144D2CD0F69000C2518F /* SwiftKeychainWrapper in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -125,6 +130,7 @@
 			);
 			name = ImageFeed;
 			packageProductDependencies = (
+				AF39144C2CD0F69000C2518F /* SwiftKeychainWrapper */,
 			);
 			productName = ImageFeed;
 			productReference = AF61CDE42CA6D74B005CC5BF /* ImageFeed.app */;
@@ -208,6 +214,9 @@
 			);
 			mainGroup = AF61CDDB2CA6D74B005CC5BF;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				AF39144B2CD0F60900C2518F /* XCRemoteSwiftPackageReference "SwiftKeychainWrapper" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = AF61CDE52CA6D74B005CC5BF /* Products */;
 			projectDirPath = "";
@@ -577,6 +586,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		AF39144B2CD0F60900C2518F /* XCRemoteSwiftPackageReference "SwiftKeychainWrapper" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/jrendel/SwiftKeychainWrapper.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		AF39144C2CD0F69000C2518F /* SwiftKeychainWrapper */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AF39144B2CD0F60900C2518F /* XCRemoteSwiftPackageReference "SwiftKeychainWrapper" */;
+			productName = SwiftKeychainWrapper;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = AF61CDDC2CA6D74B005CC5BF /* Project object */;
 }
